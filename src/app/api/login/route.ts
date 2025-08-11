@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { RowDataPacket } from "mysql2";
 
 interface User extends RowDataPacket {
-    id: number;
+    id_user: number;
     email: string;
     password: string;
   }
@@ -14,7 +14,7 @@ interface User extends RowDataPacket {
       const { email, password } = await req.json();
   
       const [rows] = await db.query<User[]>(
-        "SELECT * FROM users WHERE email = ?",
+        "SELECT * FROM user WHERE email = ?",
         [email]
       );
   
