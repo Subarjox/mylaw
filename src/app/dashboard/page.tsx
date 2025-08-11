@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import {
     Table,
     TableBody,
@@ -22,8 +24,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+
+  
   
   export default function TestCRUD() {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch("/api/product/call")
+          .then(res => res.json())
+          .then(data => setProducts(data));
+      }, []);
     return (
       <Card className="w-full max-w-2/3 mt-10 mx-auto">
         <CardHeader>
@@ -45,11 +55,13 @@ import {
             </TableHeader>
             <TableBody>
 
+            {products.map((p: any) => (
+  
               <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>Sukimak</TableCell>
-                <TableCell>ewewewe</TableCell>
-                <TableCell>ewewewe</TableCell>
+                <TableCell>{p.id_product}</TableCell>
+                <TableCell>{p.gambar}</TableCell>
+                <TableCell>{p.nama}</TableCell>
+                <TableCell>{p.deskripsi}</TableCell>
                 <TableCell>
 
                 <DropdownMenu>
@@ -66,7 +78,7 @@ import {
 
                 </TableCell>
               </TableRow>
-
+                ))}
 
 
             </TableBody>
