@@ -24,7 +24,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-
+  import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarHeader,
+  } from "@/components/ui/sidebar"
   
   
   export default function TestCRUD() {
@@ -35,6 +41,7 @@ import {
           .then(data => setProducts(data));
       }, []);
     return (
+      <div>
       <Card className="w-full max-w-2/3 mt-10 mx-auto">
         <CardHeader>
           <CardTitle>Test CRUD</CardTitle>
@@ -85,6 +92,7 @@ import {
           </Table>
         </CardContent>
       </Card>
+      </div>
     )
   }
   
