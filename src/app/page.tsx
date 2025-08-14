@@ -15,15 +15,18 @@ export default function Home() {
     
 
     <div className="">
-      {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-white shadow px-8 py-4">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuLink><a href="/dashboard">CRUD</a></NavigationMenuLink>
+              <NavigationMenuLink href="/dashboard">CRUD</NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink>AI Feature</NavigationMenuLink>
+              <NavigationMenuTrigger>AI Feature
+              <NavigationMenuContent>
+                <NavigationMenuLink>Link asdasd</NavigationMenuLink>
+              </NavigationMenuContent>
+              </NavigationMenuTrigger>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

@@ -11,28 +11,39 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Button } from "@/components/ui/button"
+import { useSearchParams } from "next/navigation";
+
 
 export default function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("error") === "belum_login") {
+      setMessage("Kamu belum login");
+    }
+  }, [searchParams]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ email, password })
     });
 
     const data = await res.json();
     if (res.ok) {
       setMessage("Login berhasil!");
+      console.log("Redirecting to dashboard...");
       setTimeout(() => {
-        window.location.href = "/login";
-      }, 2000); 
+        window.location.assign("/dashboard");
+      }, 1000); 
     } else {
       setMessage(data.error || "Login gagal");
     }

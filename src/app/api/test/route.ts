@@ -3,6 +3,7 @@ import { RowDataPacket } from "mysql2";
 
 export async function GET() {
   try {
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const [rows] = await db.query<RowDataPacket[]>(
       "SELECT * FROM user WHERE id_user = 1"
     );
@@ -27,4 +28,6 @@ export async function GET() {
       headers: { "Content-Type": "application/json" }
     });
   }
+
+  
 }

@@ -33,7 +33,7 @@ interface User extends RowDataPacket {
       }
   
       const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id_user, email: user.email }, 
         process.env.JWT_SECRET!,
         { expiresIn: "1h" }
       );
@@ -41,10 +41,11 @@ interface User extends RowDataPacket {
       return new Response(JSON.stringify({ message: "Login successful" }), {
         status: 200,
         headers: {
-          "Set-Cookie": `token=${token}; HttpOnly; Path=/; Max-Age=3600`,
+          "Set-Cookie": `token=${token}; HttpOnly; Path=/; Max-Age=3600; SameSite=Lax; Secure=${process.env.NODE_ENV === "production"}`,
           "Content-Type": "application/json"
         }
       });
+      
   
     } catch (error) {
       console.error(error);
